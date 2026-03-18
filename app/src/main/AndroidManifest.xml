@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.EvidentReader">
+        <activity
+            android:name=".MainBodyActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main_body"
+            android:theme="@style/Theme.EvidentReader.NoActionBar" />
+        <activity
+            android:name=".ui.login.CreateAccountActivity"
+            android:exported="false"
+            android:label="@string/title_activity_create_account" />
+        <activity
+            android:name=".ui.login.LoginEmActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login_em" />
+        <activity
+            android:name=".SignInFbActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignInGgActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignInEmActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
