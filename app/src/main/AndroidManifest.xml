@@ -18,11 +18,11 @@
             android:label="@string/title_activity_main_body"
             android:theme="@style/Theme.EvidentReader.NoActionBar" />
         <activity
-            android:name=".ui.login.CreateAccountActivity"
+            android:name=".CreateAccountActivity"
             android:exported="false"
             android:label="@string/title_activity_create_account" />
         <activity
-            android:name=".ui.login.LoginEmActivity"
+            android:name=".LoginEmActivity"
             android:exported="false"
             android:label="@string/title_activity_login_em" />
         <activity
@@ -32,11 +32,8 @@
             android:name=".SignInGgActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInEmActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

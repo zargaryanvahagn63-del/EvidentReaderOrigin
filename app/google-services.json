@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "562011847290",
+    "project_id": "evidentreader",
+    "storage_bucket": "evidentreader.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562011847290:android:6b5a126176d10b721319c3",
+        "android_client_info": {
+          "package_name": "zargaryan.vahagn.evidentreader"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfEW8F8ZPtmV4sA0pxoVjUgoJ72fY83ZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("com.google.gms.google-services")  version "4.4.2" apply false
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -43,7 +43,6 @@ dependencies {
     implementation(libs.annotation)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.firebase.inappmessaging)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database)
@@ -55,7 +54,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    // implementation(libs.material)
-    implementation("com.android.support:cardview-v7:28.0.0")
     implementation("com.rengwuxian.materialedittext:library:2.1.4")
 }

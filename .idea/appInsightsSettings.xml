@@ -9,10 +9,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="zargaryan.vahagn.evidentreader" />
+                  <option name="mobileSdkAppId" value="1:562011847290:android:6b5a126176d10b721319c3" />
+                  <option name="projectId" value="evidentreader" />
+                  <option name="projectNumber" value="562011847290" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
