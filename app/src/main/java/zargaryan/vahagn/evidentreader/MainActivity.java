@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -18,6 +19,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private void showRegWin() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Registration");
-        dialog.setMessage("Please enter your email and password");
+        dialog.setMessage("Please enter all the fields to register");
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.activity_create_account, null);
         dialog.setView(view);
@@ -96,6 +98,58 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void showSignInWin() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Signing in");
+        dialog.setMessage("Please enter your email and password");
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.activity_login_em, null);
+        dialog.setView(view);
+
+        final TextInputLayout email = view.findViewById(R.id.email);
+        final TextInputLayout password = view.findViewById(R.id.password);
+        CardView container = view.findViewById(R.id.main);
+
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                dialogInterface.dismiss();
+            }
+        });
+        dialog.setPositiveButton("Sign in", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                if (TextUtils.isEmpty(email.getEditText().getText().toString())) {
+                    Snackbar.make(view, "Please enter your email", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(password.getEditText().getText().toString()) ||
+                        password.getEditText().getText().toString().length() < 8) {
+                    Snackbar.make(view, "Please enter your password", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                auth.signInWithEmailAndPassword(email.getEditText().getText().toString(),
+                        password.getEditText().getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Snackbar.make(view, "Signed in successfully", Snackbar.LENGTH_SHORT).show();
+                        // Intent intent = new Intent(MainActivity.this, MainBodyActivity.class);
+                        // startActivity(intent);
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Snackbar.make(view, "Signing in went wrong. " + e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        dialog.show();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,8 +178,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         signInEm.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, LoginEmActivity.class);
-            startActivity(intent);
+            showSignInWin();
         });
 
 
