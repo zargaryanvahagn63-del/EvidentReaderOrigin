@@ -9,15 +9,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
         android:gravity="center|top"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,7 +51,8 @@
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:gravity="bottom"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,18 +66,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="           Sign in "
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/sign_in_em"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="      Sign in      "
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"/>
 
         </LinearLayout>
 
@@ -87,7 +85,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="bottom|center_horizontal"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/sign_in_fb"
@@ -97,20 +95,14 @@
                 android:textSize="18sp" />
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <Button
                 android:id="@+id/cr_acc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Create account"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"/>
 
         </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>

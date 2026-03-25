@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -50,52 +51,39 @@ public class MainActivity extends AppCompatActivity {
         final TextInputLayout email = view.findViewById(R.id.email);
         final TextInputLayout password = view.findViewById(R.id.password);
         final TextInputLayout repeatPassword = view.findViewById(R.id.repeat_password);
-        CardView container = view.findViewById(R.id.main);
+        
+        LinearLayout root = findViewById(R.id.main);
 
-        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                dialogInterface.dismiss();
+        dialog.setNegativeButton("Cancel", (dialogInterface, which) -> dialogInterface.dismiss());
+        
+        dialog.setPositiveButton("Create account", (dialogInterface, which) -> {
+            if (TextUtils.isEmpty(name.getEditText().getText().toString())) {
+                Snackbar.make(root, "Please enter your name", Snackbar.LENGTH_INDEFINITE).show();
+                return;
             }
-        });
-        dialog.setPositiveButton("Create account", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                if (TextUtils.isEmpty(name.getEditText().getText().toString())) {
-                    Snackbar.make(view, "Please enter your name", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(email.getEditText().getText().toString())) {
-                    Snackbar.make(view, "Please enter your email", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                if (!password.getEditText().getText().toString().equals(repeatPassword.getEditText().getText().toString()) ||
-                        password.getEditText().getText().toString().length() < 8) {
-                    Snackbar.make(view, "Please enter your password correctly", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
+            if (TextUtils.isEmpty(email.getEditText().getText().toString())) {
+                Snackbar.make(root, "Please enter your email", Snackbar.LENGTH_INDEFINITE).show();
+                return;
+            }
+            if (!password.getEditText().getText().toString().equals(repeatPassword.getEditText().getText().toString()) ||
+                    password.getEditText().getText().toString().length() < 8) {
+                Snackbar.make(root, "Please enter your password correctly (min 8 chars)", Snackbar.LENGTH_INDEFINITE).show();
+                return;
+            }
 
-                 auth.createUserWithEmailAndPassword(email.getEditText().getText().toString(),
-                        password.getEditText().getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        User user = new User(name.getEditText().getText().toString(), email.getEditText().getText().toString(),
-                                password.getEditText().getText().toString());
-                        users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Snackbar.make(view, "Account created successfully", Snackbar.LENGTH_SHORT).show();
-                                // Intent intent = new Intent(MainActivity.this, MainBodyActivity.class);
-                                // startActivity(intent);
-                            }
-                        });
-                    }
+            auth.createUserWithEmailAndPassword(email.getEditText().getText().toString().trim(),
+                    password.getEditText().getText().toString()).addOnSuccessListener(authResult -> {
+                User user = new User(name.getEditText().getText().toString(), email.getEditText().getText().toString(),
+                        password.getEditText().getText().toString());
+                users.child(auth.getCurrentUser().getUid()).setValue(user).addOnSuccessListener(unused -> {
+                    Snackbar.make(root, "Account created successfully", Snackbar.LENGTH_INDEFINITE).show();
+                    Intent intent = new Intent(MainActivity.this, MainBodyActivity.class);
+                    startActivity(intent);
                 });
-            }
+            }).addOnFailureListener(e -> Snackbar.make(root, "Registration failed: " + e.getMessage(), Snackbar.LENGTH_LONG).show());
         });
 
         dialog.show();
-
     }
 
     private void showSignInWin() {
@@ -108,46 +96,32 @@ public class MainActivity extends AppCompatActivity {
 
         final TextInputLayout email = view.findViewById(R.id.email);
         final TextInputLayout password = view.findViewById(R.id.password);
-        CardView container = view.findViewById(R.id.main);
+        
+        LinearLayout root = findViewById(R.id.main);
 
-        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                dialogInterface.dismiss();
+        dialog.setNegativeButton("Cancel", (dialogInterface, which) -> dialogInterface.dismiss());
+        
+        dialog.setPositiveButton("Sign in", (dialogInterface, which) -> {
+            if (TextUtils.isEmpty(email.getEditText().getText().toString())) {
+                Snackbar.make(root, "Please enter your email", Snackbar.LENGTH_INDEFINITE).show();
+                return;
             }
-        });
-        dialog.setPositiveButton("Sign in", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                if (TextUtils.isEmpty(email.getEditText().getText().toString())) {
-                    Snackbar.make(view, "Please enter your email", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(password.getEditText().getText().toString()) ||
-                        password.getEditText().getText().toString().length() < 8) {
-                    Snackbar.make(view, "Please enter your password", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                auth.signInWithEmailAndPassword(email.getEditText().getText().toString(),
-                        password.getEditText().getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        Snackbar.make(view, "Signed in successfully", Snackbar.LENGTH_SHORT).show();
-                        // Intent intent = new Intent(MainActivity.this, MainBodyActivity.class);
-                        // startActivity(intent);
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Snackbar.make(view, "Signing in went wrong. " + e.getMessage(), Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+            if (TextUtils.isEmpty(password.getEditText().getText().toString()) ||
+                    password.getEditText().getText().toString().length() < 8) {
+                Snackbar.make(root, "Please enter your password", Snackbar.LENGTH_INDEFINITE).show();
+                return;
             }
+            
+            auth.signInWithEmailAndPassword(email.getEditText().getText().toString().trim(),
+                    password.getEditText().getText().toString()).addOnSuccessListener(authResult -> {
+                Snackbar.make(root, "Signed in successfully", Snackbar.LENGTH_INDEFINITE).show();
+                Intent intent = new Intent(MainActivity.this, MainBodyActivity.class);
+                startActivity(intent);
+                finish();
+            }).addOnFailureListener(e -> Snackbar.make(root, "Signing in failed: " + e.getMessage(), Snackbar.LENGTH_LONG).show());
         });
 
         dialog.show();
-
     }
 
     @Override
@@ -156,31 +130,25 @@ public class MainActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        
+        LinearLayout root = findViewById(R.id.main);
+        ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-
         Button signInEm = findViewById(R.id.sign_in_em);
         Button signInGg = findViewById(R.id.sign_in_gg);
         Button crAcc = findViewById(R.id.cr_acc);
         Button signInFb = findViewById(R.id.sign_in_fb);
-        TextView anApp = findViewById(R.id.an_app);
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
         users = db.getReference("users");
 
-        crAcc.setOnClickListener(v -> {
-            showRegWin();
-        });
-
-        signInEm.setOnClickListener(v -> {
-            showSignInWin();
-        });
-
+        crAcc.setOnClickListener(v -> showRegWin());
+        signInEm.setOnClickListener(v -> showSignInWin());
 
         signInGg.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SignInGgActivity.class);
@@ -191,13 +159,5 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SignInFbActivity.class);
             startActivity(intent);
         });
-
-        /* anApp.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MainBodyActivity.class);
-            startActivity(intent);
-        }); */
-
-
-
     }
 }
