@@ -58,4 +58,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     implementation("com.rengwuxian.materialedittext:library:2.1.4")
+    implementation("com.google.android.material:material:1.10.0")
 }

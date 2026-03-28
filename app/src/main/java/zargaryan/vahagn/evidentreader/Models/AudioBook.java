@@ -1,10 +1,10 @@
 package zargaryan.vahagn.evidentreader.Models;
 
 public class AudioBook extends Book {
-    int length;
+    private int length;
     AudioBook() {}
-    AudioBook(String name, String author, int views, int length) {
-        super(name, author, views);
+    public AudioBook(String name, String author, String filePath, int length, int id) {
+        super(name, author, filePath, id);
         this.length = length;
     }
 
