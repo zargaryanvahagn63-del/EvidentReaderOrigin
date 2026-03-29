@@ -18,7 +18,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     private final OnBookClickListener listener;
 
     public interface OnBookClickListener {
-        void onClick(int bookId);
+        void onClick(Book book);
     }
 
     public BookAdapter(List<Book> books, OnBookClickListener listener) {
@@ -52,7 +52,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         // holder.image.setImage...(book.getImage());
 
         holder.itemView.setOnClickListener(v -> {
-            listener.onClick(book.getId());
+            listener.onClick(book);
         });
     }
 

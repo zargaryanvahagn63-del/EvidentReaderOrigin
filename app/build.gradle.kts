@@ -27,9 +27,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+//    kotlinOptions {
+//        jvmTarget = "17"
+//    }
     buildFeatures {
         viewBinding = true
     }
@@ -49,14 +52,16 @@ dependencies {
     implementation(libs.firebase.inappmessaging)
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
-    implementation(libs.credentials)
-    implementation(libs.credentials.play.services.auth)
-    implementation(libs.googleid)
+    
+    // Explicitly added these because they seem to be missing from the toml
+    implementation("androidx.credentials:credentials:1.5.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.5.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.2.0")
+    implementation("com.google.firebase:firebase-firestore:26.1.2")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
     implementation("com.rengwuxian.materialedittext:library:2.1.4")
-    implementation("com.google.android.material:material:1.10.0")
 }

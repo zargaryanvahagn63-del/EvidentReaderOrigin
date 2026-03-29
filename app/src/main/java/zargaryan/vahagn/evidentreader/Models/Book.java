@@ -1,10 +1,13 @@
 package zargaryan.vahagn.evidentreader.Models;
 
+import java.util.List;
+
 public class Book {
     private static int counter = 0;
     private String name;
     private String author;
     private String filePath;
+    private List<String> tags;
     private int id = counter++;
     public Book() {}
     public Book(String name, String author, String filePath, int id) {
@@ -12,6 +15,15 @@ public class Book {
         this.author = author;
         this.filePath = filePath;
         this.id = id;
+        this.tags = tags;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
     public String getName() {
