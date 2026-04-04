@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
-    android:layout_weight="1"
     android:orientation="vertical"
+    android:background="?android:windowBackground"
     tools:context=".WelcomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="2"
         android:gravity="center|top"
         android:orientation="vertical"
@@ -19,16 +19,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Welcome to\nEvidentReader"
-            android:textSize="30sp"
-            android:gravity="center"
-            android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome to\nEvidentReader"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnBackground"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,25 +38,21 @@
                 android:layout_gravity="center"
                 android:text="An app for book readers"
                 android:textSize="20sp"
-                android:textStyle="italic" />
-
+                android:textStyle="italic"
+                android:textColor="?attr/colorOnBackground"/>
         </LinearLayout>
-
-
     </LinearLayout>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="3"
         android:gravity="bottom"
         android:orientation="horizontal"
         android:layout_marginBottom="20dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="bottom|center_horizontal"
@@ -65,22 +62,22 @@
                 android:id="@+id/sign_in_gg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="           Sign in "
-                android:textSize="18sp" />
-
+                android:text="Sign in"
+                android:textSize="18sp"
+                android:textColor="?attr/colorOnBackground"/>
 
             <Button
                 android:id="@+id/sign_in_em"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="      Sign in      "
+                android:text="Sign in"
                 android:textSize="18sp"
-                android:layout_marginTop="20dp"/>
-
+                android:layout_marginTop="20dp"
+                android:textColor="?attr/colorOnBackground"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="bottom|center_horizontal"
@@ -90,9 +87,9 @@
                 android:id="@+id/sign_in_fb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="           Sign in "
-                android:textSize="18sp" />
-
+                android:text="Sign in"
+                android:textSize="18sp"
+                android:textColor="?attr/colorOnBackground"/>
 
             <Button
                 android:id="@+id/cr_acc"
@@ -100,8 +97,8 @@
                 android:layout_height="wrap_content"
                 android:text="Create account"
                 android:textSize="18sp"
-                android:layout_marginTop="20dp"/>
-
+                android:layout_marginTop="20dp"
+                android:textColor="?attr/colorOnBackground"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

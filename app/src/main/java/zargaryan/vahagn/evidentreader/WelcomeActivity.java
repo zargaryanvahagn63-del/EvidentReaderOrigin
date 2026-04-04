@@ -49,16 +49,16 @@ public class WelcomeActivity extends AppCompatActivity {
         
         dialog.setPositiveButton("Create account", (dialogInterface, which) -> {
             if (TextUtils.isEmpty(name.getEditText().getText().toString())) {
-                Snackbar.make(root, "Please enter your name", Snackbar.LENGTH_INDEFINITE).show();
+                Snackbar.make(root, "Please enter your name", Snackbar.LENGTH_LONG).show();
                 return;
             }
             if (TextUtils.isEmpty(email.getEditText().getText().toString())) {
-                Snackbar.make(root, "Please enter your email", Snackbar.LENGTH_INDEFINITE).show();
+                Snackbar.make(root, "Please enter your email", Snackbar.LENGTH_LONG).show();
                 return;
             }
             if (!password.getEditText().getText().toString().equals(repeatPassword.getEditText().getText().toString()) ||
                     password.getEditText().getText().toString().length() < 8) {
-                Snackbar.make(root, "Please enter your password correctly (min 8 chars)", Snackbar.LENGTH_INDEFINITE).show();
+                Snackbar.make(root, "Please enter your password correctly (min 8 chars)", Snackbar.LENGTH_LONG).show();
                 return;
             }
 
@@ -67,9 +67,10 @@ public class WelcomeActivity extends AppCompatActivity {
                 User user = new User(name.getEditText().getText().toString(), email.getEditText().getText().toString(),
                         password.getEditText().getText().toString());
                 users.child(auth.getCurrentUser().getUid()).setValue(user).addOnSuccessListener(unused -> {
-                    Snackbar.make(root, "Account created successfully", Snackbar.LENGTH_INDEFINITE).show();
+                    Snackbar.make(root, "Account created successfully", Snackbar.LENGTH_LONG).show();
                     Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
                 });
             }).addOnFailureListener(e -> Snackbar.make(root, "Registration failed: " + e.getMessage(), Snackbar.LENGTH_LONG).show());
         });
@@ -94,18 +95,18 @@ public class WelcomeActivity extends AppCompatActivity {
         
         dialog.setPositiveButton("Sign in", (dialogInterface, which) -> {
             if (TextUtils.isEmpty(email.getEditText().getText().toString())) {
-                Snackbar.make(root, "Please enter your email", Snackbar.LENGTH_INDEFINITE).show();
+                Snackbar.make(root, "Please enter your email", Snackbar.LENGTH_LONG).show();
                 return;
             }
             if (TextUtils.isEmpty(password.getEditText().getText().toString()) ||
                     password.getEditText().getText().toString().length() < 8) {
-                Snackbar.make(root, "Please enter your password", Snackbar.LENGTH_INDEFINITE).show();
+                Snackbar.make(root, "Please enter your password", Snackbar.LENGTH_LONG).show();
                 return;
             }
             
             auth.signInWithEmailAndPassword(email.getEditText().getText().toString().trim(),
                     password.getEditText().getText().toString()).addOnSuccessListener(authResult -> {
-                Snackbar.make(root, "Signed in successfully", Snackbar.LENGTH_INDEFINITE).show();
+                Snackbar.make(root, "Signed in successfully", Snackbar.LENGTH_LONG).show();
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -121,6 +122,12 @@ public class WelcomeActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_welcome);
+
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        );
         
         LinearLayout root = findViewById(R.id.main);
         ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
@@ -141,14 +148,14 @@ public class WelcomeActivity extends AppCompatActivity {
         crAcc.setOnClickListener(v -> showRegWin());
         signInEm.setOnClickListener(v -> showSignInWin());
 
-        signInGg.setOnClickListener(v -> {
-            Intent intent = new Intent(WelcomeActivity.this, SignInGgActivity.class);
-            startActivity(intent);
-        });
+//        signInGg.setOnClickListener(v -> {
+//            Intent intent = new Intent(WelcomeActivity.this, SignInGgActivity.class);
+//            startActivity(intent);
+//        });
 
-        signInFb.setOnClickListener(v -> {
-            Intent intent = new Intent(WelcomeActivity.this, SignInFbActivity.class);
-            startActivity(intent);
-        });
+//        signInFb.setOnClickListener(v -> {
+//            Intent intent = new Intent(WelcomeActivity.this, SignInFbActivity.class);
+//            startActivity(intent);
+//        });
     }
 }

@@ -14,8 +14,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:label="@string/title_activity_main_body"
-            android:theme="@style/Theme.EvidentReader.NoActionBar" />
+            android:label="@string/title_activity_main_body" />
+            <!-- android:theme="@style/Theme.EvidentReader.NoActionBar" -->
         <activity
             android:name=".SignInFbActivity"
             android:exported="false" />

@@ -37,6 +37,8 @@ public class HomeFragment extends Fragment {
 
         recycler.setAdapter(new GenreAdapter(genres));
 
+        recycler.setNestedScrollingEnabled(false);
+
         return view;
     }
 }
